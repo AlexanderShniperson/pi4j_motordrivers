@@ -1,0 +1,59 @@
+group 'net.orionlab.tankclient'
+version '1.0'
+
+apply plugin: 'application'
+apply plugin: 'java'
+
+mainClassName = 'net.orionlab.tankclient.MainApp'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven {
+        url "https://oss.sonatype.org/content/groups/public"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.pi4j', name: 'pi4j-core', version: '1.2-SNAPSHOT'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    testCompile group: 'org.testng', name: 'testng', version: '6.11'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
+        }
+    }
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+test {
+    useTestNG() {
+    // suiteXmlFiles << new File(rootDir, "testng.xml") //This is how to add custom testng.xml
+    }
+    testLogging {
+        showStandardStreams = true
+
+        // log results to "build/test-results" directory
+        exceptionFormat "full"
+        events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
