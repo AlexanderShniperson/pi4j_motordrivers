@@ -18,7 +18,7 @@ public class L298NMotorController {
     public void initMotors(GpioController gpioController) {
         if (isInitialized) return;
         isInitialized = true;
-        leftMotor.initPins(gpioController, RaspiPin.GPIO_26, RaspiPin.GPIO_04, RaspiPin.GPIO_05);
+        leftMotor.initPins(gpioController, RaspiPin.GPIO_24, RaspiPin.GPIO_04, RaspiPin.GPIO_05);
         rightMotor.initPins(gpioController, RaspiPin.GPIO_01, RaspiPin.GPIO_03, RaspiPin.GPIO_02);
     }
 
